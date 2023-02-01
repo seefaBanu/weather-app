@@ -15,6 +15,10 @@ export const fetchWeather = async(query) => {
     })
 
 
+
+
+
+
   return data;
 }
 

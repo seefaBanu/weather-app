@@ -6,6 +6,7 @@ import './App.css'
 const App = () => {
     const [query, setQuery] = React.useState('');
     const [weather, setWeather] = React.useState({});
+    const [error, setError] = React.useState('');
 
     const search = async(e) => {
         if (e.key === 'Enter') {
@@ -13,6 +14,8 @@ const App = () => {
             setWeather(data);
             setQuery('');//clears the search bar
         }
+            
+        
     }
 
   return (
@@ -20,7 +23,7 @@ const App = () => {
         <input
             type={'text'}
             className={'search'}
-            placeholder={'Search...'}
+            placeholder={'Search for a city...'}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyPress={search}
@@ -43,6 +46,12 @@ const App = () => {
                     />
                     <p>{weather.weather[0].description}</p>
             </div>
+            </div>
+        )}
+
+        {error.main && (
+            <div className={'error'}>
+                hiiii
             </div>
         )}
     
