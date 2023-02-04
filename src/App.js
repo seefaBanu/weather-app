@@ -1,16 +1,29 @@
 import React from 'react'
 import {fetchWeather} from './fetchWeather'
 import './App.css'
+import { useEffect } from 'react'
+import "./animation.css"
 
 
 const App = () => {
+
+    const [loading, setLoading] = React.useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+
+    
     const [query, setQuery] = React.useState('');
     const [weather, setWeather] = React.useState({});
     const [error, setError] = React.useState('');
 
     const search = async(e) => {
+        
         if (e.key === 'Enter') {
-            const data = await fetchWeather(query);
+            const data = await fetchWeather(query); 
             setWeather(data);
             setQuery('');//clears the search bar
         }
@@ -19,6 +32,14 @@ const App = () => {
     }
 
   return (
+
+    <div className='container'>
+        {loading ? (
+        <div className="loader-container">
+            <div className="spinner"></div>
+         </div>
+      ) : (
+
     <div className='main-container'>
         <input
             type={'text'}
@@ -48,14 +69,10 @@ const App = () => {
             </div>
             </div>
         )}
-
-        {error.main && (
-            <div className={'error'}>
-                hiiii
-            </div>
-        )}
     
 
+    </div>
+        )}
     </div>
   )
 }
